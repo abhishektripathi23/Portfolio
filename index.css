@@ -353,11 +353,11 @@ section .title::after{
 .skills-content .right .js::before{
     width: 70%;
 }
-.skills-content .right .php::before{
+.skills-content .right .C::before{
     width: 80%;
 }
-.skills-content .right .mysql::before{
-    width: 50%;
+.skills-content .right .React::before{
+    width: 60%;
 }
 
 /* teams section styling */
