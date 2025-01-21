@@ -112,7 +112,7 @@ section .title::after{
 }
 .navbar .menu li a:hover{
     color: crimson;
-   border-bottom: 2px solid white;
+
 }
 .navbar.sticky .menu li a:hover{
     color: #fff;
