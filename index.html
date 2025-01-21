@@ -17,16 +17,19 @@
     </div>
     <nav class="navbar">
         <div class="max-width">
-            <div class="logo"><a href="#">Portfo<span>lio.</span></a></div>
-            <ul class="menu">
+            <div class="logo">
+                <a href="#"><img src="logo.jpg" class="logo-img">
+            </div>
+            <div>
+              <ul class="menu" id="menu">
                 <li><a href="#home" class="menu-btn">Home</a></li>
                 <li><a href="#about" class="menu-btn">About</a></li>
                 <li><a href="#services" class="menu-btn">Services</a></li>
                 <li><a href="#skills" class="menu-btn">Skills</a></li>
-               
                 <li><a href="#contact" class="menu-btn">Contact</a></li>
-            </ul>
-            <div class="menu-btn" onclick="menu-btn">
+              </ul>
+            </div>
+            <div class="menu-btn" id="toggle-menu">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
@@ -39,7 +42,7 @@
                 <div class="text-1">Hello, my name is</div>
                 <div class="text-2">Abhishek Tripathi</div>
                 <div class="text-3">And I'm a <span class="typing">Front End Developer</span></div>
-                <a href="#">Hire me</a>
+                <a href="#contact">Hire me</a>
             </div>
         </div>
     </section>
@@ -53,11 +56,11 @@
                     <img src="Abhi 1.jpg" alt="">
                 </div>
                 <div class="column right">
-                    <div class="text">I'm Abhishek tripathi and I'm a <span class="typing-2"></span></div>
+                    <div class="text">I'm Abhishek tripathi and I'm  <span class="typing-2"></span></div>
                     <p>A web developer creates websites using HTML, CSS, and JavaScript, collaborating with clients
                          and designers to meet functional and 
                         aesthetic goals while staying updated with new web technologies.</p>
-                    <a href="https://drive.google.com/file/d/1fTc3N2ObTDUjPpumHHwOOmuk-b5wqvKv/view?usp=drive_link">Download CV</a>
+                 <a href="https://drive.google.com/file/d/1fTc3N2ObTDUjPpumHHwOOmuk-b5wqvKv/view?usp=drive_link" target="_blank" >Download CV</a>
                 </div>
             </div>
         </div>
@@ -230,7 +233,10 @@
 
     <!-- footer section start -->
     <footer>
-        <span>Created By <a href="#">Abhishek Tripathi</a> | <span class="far fa-copyright"></span> 2024 All rights reserved.</span>
+        <span>Created By <a href="#">Abhishek Tripathi</a>  <span class="far fa-copyright"></span> 2024 All rights reserved.</span>
     </footer>
+
+     <script src="index.js"></script>
+
 </body>
 </html>
