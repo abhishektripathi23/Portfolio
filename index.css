@@ -69,7 +69,8 @@ section .title::after{
     padding: 10px 0;
     font-family: 'Ubuntu', sans-serif;
     transition: all 0.3s ease;
-    background-color: #295624;
+    background-color: #383939;
+    box-shadow: 3px 3px 3px 3px;
 }
 .navbar.sticky{
     padding: 15px 0;
@@ -164,8 +165,9 @@ section .title::after{
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Ubuntu', sans-serif;
-    background-color: #224618e3;
+    background-color: #242727e3;
     height: 300px;
+   
 }
 .home .max-width{
   width: 100%;
@@ -210,11 +212,11 @@ section .title::after{
 /* about section styling */
 .about .title::after{
     content: "who i am"; 
-    
+    background-color: #3a3e3ee3;
 }
 .about{
-    background-color: rgb(57, 97, 51);
-    color: #fff;
+    background-color: #242727e3;
+    color: #ffffff;
 }
 .about .about-content .left{
     width: 45%;
@@ -263,16 +265,17 @@ section .title::after{
 
 /* services section styling */
 .services, .teams{
-    color:#fff;
-    background: #3b4c2c;
+    color:#fdfcfc;
+    background-color: #242727e3;
 }
 .services .title::before,
 .teams .title::before{
-    background: #fff;
+    background: #272626;
 }
 .services .title::after,
 .teams .title::after{
-    background: #ffffff;
+    background-color: #3a3d3de3;
+
     content: "what i provide";
 }
 .services .serv-content .card{
@@ -308,9 +311,11 @@ section .title::after{
 
 .skills .title::after{
     content: "what i know";
+    background-color: #3a3e3ee3;
+
 }
 .skills{
-    background-color: rgb(57, 97, 51);
+    background-color: #242727e3;
     color: #fff;
 }
 .skills .skills-content .column{
@@ -354,7 +359,7 @@ section .title::after{
 .skills .skills-content .right .line{
     height: 5px;
     width: 100%;
-    background: lightgrey;
+    background: rgb(245, 242, 242);
     position: relative;
 }
 .skills .skills-content .right .line::before{
@@ -386,10 +391,12 @@ section .title::after{
 /* contact section styling */
 .contact .title::after{
     content: "get in touch";
+    background-color: #3b3b3be3;
+
     
 }
 .contact{
-    background-color: rgb(57, 97, 51);
+    background-color: #242727e3;
     color: #fff;
 }
 .contact .contact-content .column{
@@ -420,9 +427,11 @@ section .title::after{
 }
 .contact .contact-content .info .head{
     font-weight: 500;
+    color: #d31b1b;
+
 }
 .contact .contact-content .info .sub-title{
-    color: #fefcfc;
+    color: #f2f2f2;
 }
 .contact .right form .fields{
     display: flex;
