@@ -1,9 +1,9 @@
 <?php
 // DB connection
-$host = "sql100.infinityfree.com";
-$user = "if0_38415183";
-$pass = "XugwJN6nlv";
-$dbname = "if0_38415183_survey";
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbname = "portfolio_db";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 
@@ -15,13 +15,13 @@ if ($conn->connect_error) {
 // Form data
 $name = $_POST['name'];
 $email = $_POST['email'];
-
+$subject = $_POST['subject'];
 $message = $_POST['message'];
 
 // Insert into database
-$sql = "INSERT INTO contact_data (name, email,  message) VALUES (?, ?, ?)";
+$sql = "INSERT INTO contact_data (name, email, subject, message) VALUES (?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssss", $name, $email, $message);
+$stmt->bind_param("ssss", $name, $email, $subject, $message);
 
 if ($stmt->execute()) {
     echo "Message sent successfully!";
