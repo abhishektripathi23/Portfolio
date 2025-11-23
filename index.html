@@ -552,6 +552,11 @@ function validateForm() {
         $("#phone").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
         valid = false;
     }
+  
+    if(!$("#subject").val()) {
+        $("#subject").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
+        valid = false;
+    }
 
     if(!$("#message").val()) {
         $("#message").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
