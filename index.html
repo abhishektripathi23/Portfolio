@@ -415,29 +415,32 @@
                 </div>
                 <div class="column right">
                     <div class="text">Message me</div>
-                    <form action="#" class="text-black">
+                    <form  class="text-black" id="enquiryForm">
                       <div class="fields">
                           <div class="field name">
-                              <input type="text" name="name" placeholder="Name" required>
+                              <input type="text" id="name" name="name" placeholder="Name" >
                           </div>
                           <div class="field email">
-                              <input type="email" name="email" placeholder="Email" required>
+                              <input type="email" id="email" name="email" placeholder="Email" required>
                           </div>
                       </div>
                       <div class="field">
-                          <input type="mobile" name="Phone" placeholder="Phone" required>
+                          <input type="mobile" id="phone" name="phone" placeholder="Phone Number" 
+                          onkeypress="return isNumber(event)" minlength="10" maxlength="15">
                       </div>
                       <div class="field">
-                          <input type="text" name="subject" placeholder="Subject" required>
+                          <input type="text" id="subject" name="subject" placeholder="Subject">
                       </div>
                       <div class="field textarea">
-                          <textarea name="message" cols="30" rows="10" placeholder="Message.." required></textarea>
+                          <textarea name="message" id="message" cols="30" rows="10" placeholder="Message.."></textarea>
                       </div>
                       <div class="button-area">
                           <button type="submit">Send message</button>
                       </div>
                   </form>
-                  
+                  <div id="thankyou" style="display:none; text-align:center; font-size:18px; color:green; padding:20px;">
+                   <p>Thank you! Your enquiry was sent successfully.</p>
+                </div>
                 </div>
             </div>
         </div>
@@ -449,6 +452,96 @@
     </footer>
 
      <script src="index.js"></script>
+
+     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+     // Allow digits only in phone field
+function isNumber(evt) {
+    var charCode = evt.which ? evt.which : evt.keyCode;
+    if (charCode < 48 || charCode > 57) return false;
+    return true;
+}
+
+$(document).ready(function(){
+    $("#enquiryForm").on("submit", function(e) {
+        e.preventDefault(); 
+        
+        if (validateForm()) { 
+            var name    = $("#name").val();
+            var email   = $("#email").val();
+            var phone   = $("#phone").val();
+            var subject = $("#subject").val();
+            var message = $("#message").val();
+
+            var baseUrl = window.location.hostname === "https" 
+                ? "https://portfolio-hazel-ten-91.vercel.app"
+                : window.location.origin;
+
+            var ajaxUrl = baseUrl + "/ajax.php?q=requestQuote";
+
+            $.ajax({        
+                url: ajaxUrl,
+                type: 'POST',
+                dataType: 'html',
+                data: { 
+                    name:name, 
+                    email:email, 
+                    phone:phone, 
+                    subject:subject, 
+                    message:message 
+                },
+                success: function(response) {
+                    if($.trim(response) == "1") {
+                        $("#thankyou").show();
+                        $("#enquiryForm").hide();
+                    } else {
+                        $("#thankyou")
+                            .html('<p style="color:red;">Something went wrong. Please try again.</p>')
+                            .show();
+                        $("#enquiryForm").show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $("#thankyou")
+                        .html('<p style="color:red;">Failed to connect. Please check again.</p>')
+                        .show();
+                }
+            });
+        }
+    });
+});
+
+function validateForm() {
+    var valid = true;
+
+    $("#enquiryForm input, #enquiryForm textarea").css({'background-color':'', 'border':''});
+
+    if(!$("#name").val()) {
+        $("#name").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
+        valid = false;
+    }
+
+    if(!$("#email").val() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#email").val())) {
+        $("#email").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
+        valid = false;
+    }
+
+    if(!$("#phone").val() || $("#phone").val().length < 10 || $("#phone").val().length > 15) {
+        $("#phone").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
+        valid = false;
+    }
+
+    if(!$("#message").val()) {
+        $("#message").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
+        valid = false;
+    }
+
+    return valid;
+}
+</script>
 
 </body>
 </html>
