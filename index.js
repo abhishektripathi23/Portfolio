@@ -4,9 +4,9 @@ const r = document.documentElement,
     mobile = document.getElementById('mobile');
 
 
-// ==========================================
+// ======================================================
 // THEME
-// ==========================================
+// ======================================================
 
 const saved = localStorage.getItem('portfolio-theme');
 
@@ -21,49 +21,67 @@ function setTheme(x) {
     r.dataset.theme = x;
     localStorage.setItem('portfolio-theme', x);
 
-    t.innerHTML = x === 'dark' ? '☀' : '☾';
+    if (t) {
+        t.innerHTML = x === 'dark' ? '☀' : '☾';
+    }
 }
 
-t.onclick = () => {
-    setTheme(
-        r.dataset.theme === 'dark'
-            ? 'light'
-            : 'dark'
-    );
-};
-
-
-// ==========================================
-// MOBILE MENU
-// ==========================================
-
-m.onclick = () => {
-    mobile.style.display =
-        mobile.style.display === 'block'
-            ? 'none'
-            : 'block';
-};
-
-document.querySelectorAll('#mobile a').forEach(a => {
-    a.onclick = () => {
-        mobile.style.display = 'none';
+if (t) {
+    t.onclick = () => {
+        setTheme(
+            r.dataset.theme === 'dark'
+                ? 'light'
+                : 'dark'
+        );
     };
-});
+}
 
 
-// ==========================================
+// ======================================================
+// MOBILE MENU
+// ======================================================
+
+if (m && mobile) {
+
+    m.onclick = () => {
+
+        mobile.style.display =
+            mobile.style.display === 'block'
+                ? 'none'
+                : 'block';
+
+    };
+
+    document.querySelectorAll('#mobile a').forEach(a => {
+
+        a.onclick = () => {
+            mobile.style.display = 'none';
+        };
+
+    });
+}
+
+
+// ======================================================
 // REVEAL ANIMATION
-// ==========================================
+// ======================================================
 
 const o = new IntersectionObserver(
-    es => es.forEach(e => {
+    es => {
 
-        if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            o.unobserve(e.target);
-        }
+        es.forEach(e => {
 
-    }),
+            if (e.isIntersecting) {
+
+                e.target.classList.add('visible');
+
+                o.unobserve(e.target);
+
+            }
+
+        });
+
+    },
     {
         threshold: 0.08
     }
@@ -74,21 +92,37 @@ document.querySelectorAll('.reveal').forEach(e => {
 });
 
 
-// ==========================================
+// ======================================================
 // CURRENT YEAR
-// ==========================================
+// ======================================================
 
-document.getElementById('year').textContent =
-    new Date().getFullYear();
+const year = document.getElementById('year');
+
+if (year) {
+    year.textContent = new Date().getFullYear();
+}
 
 
-// ==========================================
+// ======================================================
 // CONTACT FORM
-// ==========================================
+// ======================================================
+//
+// No PHP
+// No database
+// No API
+// No external email service
+//
+// The recruiter's email application will open with
+// the form information already filled in.
+//
 
-const f = document.getElementById('contactForm');
-const s = document.getElementById('status');
-const b = document.getElementById('submit');
+
+// Get existing elements from your current HTML
+
+const f = document.getElementById('contactForm'),
+    s = document.getElementById('status'),
+    b = document.getElementById('submit');
+
 
 if (f) {
 
@@ -96,52 +130,131 @@ if (f) {
 
         e.preventDefault();
 
-        // Check HTML validation
+
+        // ----------------------------------------------
+        // HTML validation
+        // ----------------------------------------------
+
         if (!f.checkValidity()) {
+
             f.reportValidity();
+
             return;
+
         }
 
-        // Get form values
+
+        // ----------------------------------------------
+        // Get form fields
+        // ----------------------------------------------
+
+        const nameElement =
+            document.getElementById('name');
+
+        const emailElement =
+            document.getElementById('email');
+
+        const subjectElement =
+            document.getElementById('subject');
+
+        const messageElement =
+            document.getElementById('message');
+
+
+        // Make sure the fields exist
+
+        if (
+            !nameElement ||
+            !emailElement ||
+            !subjectElement ||
+            !messageElement
+        ) {
+
+            if (s) {
+
+                s.textContent =
+                    'Contact form fields are not configured correctly.';
+
+                s.style.color = '#dc2626';
+
+            }
+
+            return;
+
+        }
+
+
+        // ----------------------------------------------
+        // Get values
+        // ----------------------------------------------
+
         const name =
-            document.getElementById('name').value.trim();
+            nameElement.value.trim();
 
         const email =
-            document.getElementById('email').value.trim();
+            emailElement.value.trim();
 
         const subject =
-            document.getElementById('subject').value.trim();
+            subjectElement.value.trim();
 
         const message =
-            document.getElementById('message').value.trim();
+            messageElement.value.trim();
 
 
-        // ======================================
-        // BASIC VALIDATION
-        // ======================================
+        // ----------------------------------------------
+        // Validate
+        // ----------------------------------------------
 
         if (!name || !email || !subject || !message) {
 
-            s.textContent =
-                'Please fill in all fields.';
+            if (s) {
 
-            s.style.color = '#dc2626';
+                s.textContent =
+                    'Please fill in all fields.';
+
+                s.style.color = '#dc2626';
+
+            }
 
             return;
+
         }
 
 
-        // ======================================
+        // ----------------------------------------------
+        // Validate email
+        // ----------------------------------------------
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+
+            if (s) {
+
+                s.textContent =
+                    'Please enter a valid email address.';
+
+                s.style.color = '#dc2626';
+
+            }
+
+            return;
+
+        }
+
+
+        // ==================================================
         // YOUR EMAIL ADDRESS
-        // ======================================
+        // ==================================================
 
         const recipient =
             'abhishektripathi0205@gmail.com';
 
 
-        // ======================================
-        // CREATE EMAIL SUBJECT
-        // ======================================
+        // ----------------------------------------------
+        // Email subject
+        // ----------------------------------------------
 
         const emailSubject =
             encodeURIComponent(
@@ -149,9 +262,9 @@ if (f) {
             );
 
 
-        // ======================================
-        // CREATE EMAIL BODY
-        // ======================================
+        // ----------------------------------------------
+        // Email body
+        // ----------------------------------------------
 
         const emailBody =
             encodeURIComponent(
@@ -159,64 +272,92 @@ if (f) {
 
 You have received a new message from your portfolio website.
 
---------------------------------
+========================================
 CONTACT DETAILS
---------------------------------
+========================================
 
-Name: ${name}
+Name:
+${name}
 
-Email: ${email}
+Email:
+${email}
 
-Subject: ${subject}
+Subject:
+${subject}
 
 Message:
 ${message}
 
---------------------------------
+========================================
 Sent from Abhishek Tripathi Portfolio
---------------------------------`
+========================================`
             );
 
 
-        // ======================================
-        // CREATE MAILTO LINK
-        // ======================================
+        // ----------------------------------------------
+        // Create mailto URL
+        // ----------------------------------------------
 
         const mailtoLink =
-            `mailto:${recipient}?subject=${emailSubject}&body=${emailBody}`;
+            `mailto:${recipient}` +
+            `?subject=${emailSubject}` +
+            `&body=${emailBody}`;
 
 
-        // ======================================
-        // BUTTON STATE
-        // ======================================
+        // ----------------------------------------------
+        // Button state
+        // ----------------------------------------------
 
-        b.disabled = true;
-        b.textContent = 'Opening Email...';
+        if (b) {
 
+            b.disabled = true;
 
-        // ======================================
-        // OPEN EMAIL APPLICATION
-        // ======================================
+            b.textContent =
+                'Opening Email...';
 
-        window.location.href = mailtoLink;
-
-
-        // ======================================
-        // SHOW STATUS
-        // ======================================
-
-        s.textContent =
-            'Opening your email application...';
-
-        s.style.color = 'var(--success)';
+        }
 
 
+        // ----------------------------------------------
+        // Status
+        // ----------------------------------------------
+
+        if (s) {
+
+            s.textContent =
+                'Opening your email application...';
+
+            s.style.color =
+                'var(--success)';
+
+        }
+
+
+        // ----------------------------------------------
+        // Open email application
+        // ----------------------------------------------
+
+        window.location.href =
+            mailtoLink;
+
+
+        // ----------------------------------------------
         // Restore button
+        // ----------------------------------------------
+
         setTimeout(() => {
 
-            b.disabled = false;
-            b.textContent = 'Send Message →';
+            if (b) {
+
+                b.disabled = false;
+
+                b.textContent =
+                    'Send Message →';
+
+            }
 
         }, 1500);
+
     };
+
 }
