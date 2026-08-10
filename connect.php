@@ -1,34 +1,212 @@
 <?php
-// DB connection
-$host = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "portfolio_db";
 
-$conn = new mysqli($host, $user, $pass, $dbname);
+declare(strict_types=1);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+header('Content-Type: application/json; charset=utf-8');
+
+/*
+|--------------------------------------------------------------------------
+| Allow only POST requests
+|--------------------------------------------------------------------------
+*/
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+
+    http_response_code(405);
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'Only POST requests are allowed.'
+    ]);
+
+    exit;
 }
 
-// Form data
-$name = $_POST['name'];
-$email = $_POST['email'];
-$subject = $_POST['subject'];
-$message = $_POST['message'];
 
-// Insert into database
-$sql = "INSERT INTO contact_data (name, email, subject, message) VALUES (?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssss", $name, $email, $subject, $message);
+/*
+|--------------------------------------------------------------------------
+| Helper function
+|--------------------------------------------------------------------------
+*/
 
-if ($stmt->execute()) {
-    echo "Message sent successfully!";
-} else {
-    echo "Error: " . $stmt->error;
+function cleanInput(string $value): string
+{
+    return trim(strip_tags($value));
 }
 
-$stmt->close();
-$conn->close();
+
+/*
+|--------------------------------------------------------------------------
+| Get form data
+|--------------------------------------------------------------------------
+*/
+
+$name = cleanInput($_POST['name'] ?? '');
+
+$email = trim($_POST['email'] ?? '');
+
+$subject = cleanInput($_POST['subject'] ?? '');
+
+$message = trim(strip_tags($_POST['message'] ?? ''));
+
+
+/*
+|--------------------------------------------------------------------------
+| Validation
+|--------------------------------------------------------------------------
+*/
+
+if (
+    $name === '' ||
+    $email === '' ||
+    $subject === '' ||
+    $message === ''
+) {
+
+    http_response_code(422);
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'Please fill in all required fields.'
+    ]);
+
+    exit;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Validate email
+|--------------------------------------------------------------------------
+*/
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+    http_response_code(422);
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'Please enter a valid email address.'
+    ]);
+
+    exit;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Your receiving email
+|--------------------------------------------------------------------------
+|
+| IMPORTANT:
+| Change this to your actual email address.
+|
+*/
+
+$recipient = 'abhishektripathi0205@gmail.com';
+
+
+/*
+|--------------------------------------------------------------------------
+| Prevent email header injection
+|--------------------------------------------------------------------------
+*/
+
+$name = preg_replace('/[\r\n]+/', ' ', $name);
+
+$email = preg_replace('/[\r\n]+/', ' ', $email);
+
+$subject = preg_replace('/[\r\n]+/', ' ', $subject);
+
+
+/*
+|--------------------------------------------------------------------------
+| Email body
+|--------------------------------------------------------------------------
+*/
+
+$emailBody = "
+
+You have received a new message from your portfolio.
+
+--------------------------------------------------
+
+Name:
+$name
+
+Email:
+$email
+
+Subject:
+$subject
+
+--------------------------------------------------
+
+Message:
+
+$message
+
+--------------------------------------------------
+
+Sent from:
+Abhishek Tripathi Portfolio
+
+";
+
+
+/*
+|--------------------------------------------------------------------------
+| Email headers
+|--------------------------------------------------------------------------
+*/
+
+$headers = [];
+
+$headers[] = 'MIME-Version: 1.0';
+
+$headers[] = 'Content-Type: text/plain; charset=UTF-8';
+
+$headers[] = 'From: Portfolio Contact <' . $recipient . '>';
+
+$headers[] = 'Reply-To: ' . $email;
+
+
+/*
+|--------------------------------------------------------------------------
+| Send email
+|--------------------------------------------------------------------------
+*/
+
+$sent = mail(
+    $recipient,
+    'Portfolio Contact: ' . $subject,
+    $emailBody,
+    implode("\r\n", $headers)
+);
+
+
+/*
+|--------------------------------------------------------------------------
+| Response
+|--------------------------------------------------------------------------
+*/
+
+if (!$sent) {
+
+    http_response_code(500);
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'Unable to send the message. Please email me directly.'
+    ]);
+
+    exit;
+}
+
+
+echo json_encode([
+    'success' => true,
+    'message' => 'Thank you! Your message has been sent successfully.'
+]);
+
 ?>
