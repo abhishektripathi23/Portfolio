@@ -4,9 +4,9 @@ const r = document.documentElement,
     mobile = document.getElementById('mobile');
 
 
-// ======================================================
+// =====================================================
 // THEME
-// ======================================================
+// =====================================================
 
 const saved = localStorage.getItem('portfolio-theme');
 
@@ -37,51 +37,40 @@ if (t) {
 }
 
 
-// ======================================================
+// =====================================================
 // MOBILE MENU
-// ======================================================
+// =====================================================
 
 if (m && mobile) {
 
     m.onclick = () => {
-
         mobile.style.display =
             mobile.style.display === 'block'
                 ? 'none'
                 : 'block';
-
     };
 
     document.querySelectorAll('#mobile a').forEach(a => {
-
         a.onclick = () => {
             mobile.style.display = 'none';
         };
-
     });
 }
 
 
-// ======================================================
+// =====================================================
 // REVEAL ANIMATION
-// ======================================================
+// =====================================================
 
 const o = new IntersectionObserver(
-    es => {
+    es => es.forEach(e => {
 
-        es.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            o.unobserve(e.target);
+        }
 
-            if (e.isIntersecting) {
-
-                e.target.classList.add('visible');
-
-                o.unobserve(e.target);
-
-            }
-
-        });
-
-    },
+    }),
     {
         threshold: 0.08
     }
@@ -92,9 +81,9 @@ document.querySelectorAll('.reveal').forEach(e => {
 });
 
 
-// ======================================================
+// =====================================================
 // CURRENT YEAR
-// ======================================================
+// =====================================================
 
 const year = document.getElementById('year');
 
@@ -103,26 +92,13 @@ if (year) {
 }
 
 
-// ======================================================
+// =====================================================
 // CONTACT FORM
-// ======================================================
-//
-// No PHP
-// No database
-// No API
-// No external email service
-//
-// The recruiter's email application will open with
-// the form information already filled in.
-//
-
-
-// Get existing elements from your current HTML
+// =====================================================
 
 const f = document.getElementById('contactForm'),
     s = document.getElementById('status'),
     b = document.getElementById('submit');
-
 
 if (f) {
 
@@ -130,173 +106,91 @@ if (f) {
 
         e.preventDefault();
 
-
-        // ----------------------------------------------
         // HTML validation
-        // ----------------------------------------------
-
         if (!f.checkValidity()) {
-
             f.reportValidity();
-
             return;
-
         }
 
 
-        // ----------------------------------------------
-        // Get form fields
-        // ----------------------------------------------
+        // -------------------------------------------------
+        // IMPORTANT:
+        // Your HTML uses name="name", name="email", etc.
+        // So we use FormData instead of getElementById().
+        // -------------------------------------------------
 
-        const nameElement =
-            document.getElementById('name');
+        const formData = new FormData(f);
 
-        const emailElement =
-            document.getElementById('email');
-
-        const subjectElement =
-            document.getElementById('subject');
-
-        const messageElement =
-            document.getElementById('message');
+        const name = (formData.get('name') || '').trim();
+        const email = (formData.get('email') || '').trim();
+        const subject = (formData.get('subject') || '').trim();
+        const message = (formData.get('message') || '').trim();
 
 
-        // Make sure the fields exist
-
-        if (
-            !nameElement ||
-            !emailElement ||
-            !subjectElement ||
-            !messageElement
-        ) {
-
-            if (s) {
-
-                s.textContent =
-                    'Contact form fields are not configured correctly.';
-
-                s.style.color = '#dc2626';
-
-            }
-
-            return;
-
-        }
-
-
-        // ----------------------------------------------
-        // Get values
-        // ----------------------------------------------
-
-        const name =
-            nameElement.value.trim();
-
-        const email =
-            emailElement.value.trim();
-
-        const subject =
-            subjectElement.value.trim();
-
-        const message =
-            messageElement.value.trim();
-
-
-        // ----------------------------------------------
-        // Validate
-        // ----------------------------------------------
+        // -------------------------------------------------
+        // Validation
+        // -------------------------------------------------
 
         if (!name || !email || !subject || !message) {
 
             if (s) {
-
-                s.textContent =
-                    'Please fill in all fields.';
-
+                s.textContent = 'Please fill in all fields.';
                 s.style.color = '#dc2626';
-
             }
 
             return;
-
         }
 
 
-        // ----------------------------------------------
-        // Validate email
-        // ----------------------------------------------
-
-        const emailPattern =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailPattern.test(email)) {
-
-            if (s) {
-
-                s.textContent =
-                    'Please enter a valid email address.';
-
-                s.style.color = '#dc2626';
-
-            }
-
-            return;
-
-        }
-
-
-        // ==================================================
-        // YOUR EMAIL ADDRESS
-        // ==================================================
+        // -------------------------------------------------
+        // Your email address
+        // -------------------------------------------------
 
         const recipient =
             'abhishektripathi0205@gmail.com';
 
 
-        // ----------------------------------------------
+        // -------------------------------------------------
         // Email subject
-        // ----------------------------------------------
+        // -------------------------------------------------
 
-        const emailSubject =
-            encodeURIComponent(
-                'Portfolio Contact: ' + subject
-            );
+        const emailSubject = encodeURIComponent(
+            'Portfolio Contact: ' + subject
+        );
 
 
-        // ----------------------------------------------
+        // -------------------------------------------------
         // Email body
-        // ----------------------------------------------
+        // -------------------------------------------------
 
-        const emailBody =
-            encodeURIComponent(
+        const emailBody = encodeURIComponent(
 `Hello Abhishek,
 
 You have received a new message from your portfolio website.
 
-========================================
+----------------------------------------
 CONTACT DETAILS
-========================================
+----------------------------------------
 
-Name:
-${name}
+Name: ${name}
 
-Email:
-${email}
+Email: ${email}
 
-Subject:
-${subject}
+Subject: ${subject}
 
 Message:
+
 ${message}
 
-========================================
+----------------------------------------
 Sent from Abhishek Tripathi Portfolio
-========================================`
-            );
+----------------------------------------`
+        );
 
 
-        // ----------------------------------------------
-        // Create mailto URL
-        // ----------------------------------------------
+        // -------------------------------------------------
+        // Create mailto link
+        // -------------------------------------------------
 
         const mailtoLink =
             `mailto:${recipient}` +
@@ -304,60 +198,47 @@ Sent from Abhishek Tripathi Portfolio
             `&body=${emailBody}`;
 
 
-        // ----------------------------------------------
+        // -------------------------------------------------
         // Button state
-        // ----------------------------------------------
+        // -------------------------------------------------
 
         if (b) {
-
             b.disabled = true;
-
-            b.textContent =
-                'Opening Email...';
-
+            b.textContent = 'Opening Email...';
         }
 
 
-        // ----------------------------------------------
-        // Status
-        // ----------------------------------------------
+        // -------------------------------------------------
+        // Status message
+        // -------------------------------------------------
 
         if (s) {
-
             s.textContent =
                 'Opening your email application...';
 
             s.style.color =
                 'var(--success)';
-
         }
 
 
-        // ----------------------------------------------
+        // -------------------------------------------------
         // Open email application
-        // ----------------------------------------------
+        // -------------------------------------------------
 
-        window.location.href =
-            mailtoLink;
+        window.location.href = mailtoLink;
 
 
-        // ----------------------------------------------
+        // -------------------------------------------------
         // Restore button
-        // ----------------------------------------------
+        // -------------------------------------------------
 
         setTimeout(() => {
 
             if (b) {
-
                 b.disabled = false;
-
-                b.textContent =
-                    'Send Message →';
-
+                b.textContent = 'Send Message →';
             }
 
         }, 1500);
-
     };
-
 }
