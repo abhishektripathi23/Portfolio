@@ -1,52 +1,15 @@
 <?php
-// -------------------------------
-// ajax.php - Email Handler
-// -------------------------------
-
-if (isset($_GET['q']) && $_GET['q'] === "requestQuote") {
-
-    // 1. Sanitize inputs
-    $name    = trim($_POST['name'] ?? "");
-    $email   = trim($_POST['email'] ?? "");
-    $phone   = trim($_POST['phone'] ?? "");
-    $subject = trim($_POST['subject'] ?? "New Enquiry");
-    $message = trim($_POST['message'] ?? "");
-
-    // 2. Server-side validation
-    if ($name === "" || $email === "" || $phone === "" || $message === "") {
-        echo "0"; exit;
-    }
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "0"; exit;
-    }
-
-    // 3. Owner email
-    $ownerEmail = "abhishektripathi0205@gmail.com";   // <--- Your email
-
-    $emailSubject = "New Enquiry: " . $subject;
-
-    $emailBody = "
-        <h2>New Enquiry Received</h2>
-        <p><strong>Name:</strong> {$name}</p>
-        <p><strong>Email:</strong> {$email}</p>
-        <p><strong>Phone:</strong> {$phone}</p>
-        <p><strong>Message:</strong><br>{$message}</p>
-    ";
-
-    // 4. Email headers
-    $headers  = "MIME-Version: 1.0\r\n";
-    $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-    $headers .= "From: {$name} <{$email}>\r\n";
-    $headers .= "Reply-To: {$email}\r\n";
-
-    // 5. Send email
-    if (mail($ownerEmail, $emailSubject, $emailBody, $headers)) {
-        echo "1";
-    } else {
-        echo "0";
-    }
-
-    exit;
-}
+declare(strict_types=1);
+header('Content-Type: application/json; charset=utf-8');
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); echo json_encode(['success'=>false,'message'=>'Only POST requests are allowed.']); exit; }
+function clean($v){return trim(strip_tags((string)$v));}
+$name=clean($_POST['name']??''); $email=trim((string)($_POST['email']??'')); $subject=clean($_POST['subject']??''); $message=trim(strip_tags((string)($_POST['message']??'')));
+if(!$name||!$email||!$subject||!$message){http_response_code(422);echo json_encode(['success'=>false,'message'=>'Please complete all required fields.']);exit;}
+if(!filter_var($email,FILTER_VALIDATE_EMAIL)){http_response_code(422);echo json_encode(['success'=>false,'message'=>'Please enter a valid email address.']);exit;}
+$recipient='abhishektripathi0205@gmail.com'; // CHANGE THIS
+$safeName=preg_replace('/[\r\n]+/',' ',$name); $safeEmail=preg_replace('/[\r\n]+/',' ',$email); $safeSubject=preg_replace('/[\r\n]+/',' ',$subject);
+$body="New portfolio contact message\n\nName: $safeName\nEmail: $safeEmail\nSubject: $safeSubject\n\nMessage:\n$message\n";
+$server=$_SERVER['SERVER_NAME']??'localhost'; $headers="MIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nFrom: Portfolio <no-reply@$server>\r\nReply-To: $safeEmail";
+if(!mail($recipient,'Portfolio Contact: '.$safeSubject,$body,$headers)){http_response_code(500);echo json_encode(['success'=>false,'message'=>'Message could not be sent. Please email me directly.']);exit;}
+echo json_encode(['success'=>true,'message'=>'Thanks! Your message has been sent successfully.']);
 ?>
