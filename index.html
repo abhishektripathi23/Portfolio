@@ -1,571 +1,372 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
+
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhishek Tripathi Portfolio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Abhishek Tripathi — Junior Software Developer with experience in PHP, MySQL, JavaScript, REST APIs, CRM and CMS systems.">
+    <title>Abhishek Tripathi | Junior Software Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-    <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Custom styles that extend Tailwind */
-    .big-4 {
-      font-size: 3.5rem;
-      font-weight: 700;
-    }
-    
-    .big-2 {
-      font-size: 6rem;
-      font-weight: 900;
-      color: rgba(52, 152, 219, 0.1);
-    }
-   
-    
-    .block-20 {
-      height: 250px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-  
-    
-    @media (max-width: 768px) {
-      .big-4 {
-        font-size: 2.5rem;
-      }
-      
-      .big-2 {
-        font-size: 4rem;
-      }
-    }
-    @media (min-width: 768px) {
-      .big-4 {
-        font-size: 2.5rem;
-      }
-      
-      .big-2 {
-        font-size: 4rem;
-      }
-    }
-    
-    </style>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EDJSH9YET8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-EDJSH9YET8');
-</script>
-
 </head>
-<body class="bg-[#242727f9] text-white font-sans leading-relaxed">
-    <nav class="navbar">
-        <div class="max-width">
 
-            <div class="logo">
-                <a href="#"><img src="logo.jpg" class="logo-img">
-            </div>
-
-            <div>
-              <ul class="menu" id="menu">
-                <li><a href="#home" class="menu-btn">Home</a></li>
-                <li><a href="#about" class="menu-btn">About</a></li>
-                <li><a href="#services" class="menu-btn">Services</a></li>
-                <li><a href="#Education" class="menu-btn">Educations</a></li>
-                <li><a href="#Project" class="menu-btn">Projects</a></li>
-                <li><a href="#skills" class="menu-btn">Skills</a></li>
-                <li><a href="#contact" class="menu-btn">Contact</a></li>
-              </ul>
-            </div>
-
-            <div class="menu-btn" id="toggle-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </nav>
-
-    <!-- home section start -->
-    <section class="home" id="home">
-        <div class="max-width">
-            <div class="home-content">
-                <div class="text-1">Hello, my name is</div>
-                <div class="text-2">Abhishek Tripathi</div>
-                <div class="text-3">And I'm a <span class="typing">Web Developer</span></div>
-                <a href="#contact">Hire me</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- about section start -->
-    <section class="about" id="about">
-        <div class="max-width">
-            <h2 class="title">About me</h2>
-            <div class="about-content">
-                <div class="column left">
-                    <img src="Abhi 1.jpg" alt="">
+<body>
+    <header>
+        <nav class="container nav"><a class="brand" href="#home"><b>AT</b><span><strong>Abhishek
+                        Tripathi</strong><small>Junior Software Developer</small></span></a>
+            <div class="links"><a href="#home">Home</a><a href="#about">About</a><a href="#experience">Experience</a><a
+                    href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Education</a><a
+                    href="#certificates">Certifications</a><a href="#contact">Contact</a></div>
+            <div class="actions"><button id="theme" aria-label="Switch theme"><i
+                        class="fa-solid fa-moon"></i></button><a class="btn small outline" href="Resume.pdf"
+                    download>Resume</a><button id="menu">☰</button></div>
+        </nav>
+        <div id="mobile" class="container"><a href="#home">Home</a><a href="#about">About</a><a
+                href="#experience">Experience</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a
+                href="#education">Education</a><a href="#certificates">Certifications</a><a
+                href="#contact">Contact</a><a class="btn primary" href="Resume.pdf" download>Download Resume</a></div>
+    </header>
+    <main>
+        <section id="home" class="hero">
+            <div class="container hero-grid">
+                <div class="reveal"><span class="available">● Available for new opportunities</span>
+                    <p class="eyebrow">JUNIOR SOFTWARE DEVELOPER</p>
+                    <h1>Building web solutions that connect <span>technology with business needs.</span></h1>
+                    <p class="lead">I am Abhishek Tripathi, a Junior Software Developer with hands-on experience in web
+                        application development, including CRM and CMS-based
+                        systems.</p>
+                    <div class="buttons"><a class="btn primary" href="#projects">Explore My Work →</a><a
+                            class="btn outline" href="Resume.pdf" download>↓ Download Resume</a></div>
+                    <div class="meta"><span>⌖ India</span><a href="mailto:abhishektripathi0205@gmail.com">✉ Email</a><a
+                            href="https://github.com/abhishektripathi23" target="_blank">◉ GitHub</a></div>
                 </div>
-                <div class="column right">
-                    <div class="text">I'm Abhishek tripathi and I'm  <span class="typing-2"></span></div>
-                    <p>A web developer creates websites using HTML, CSS, and JavaScript, collaborating with clients
-                         and designers to meet functional and 
-                        aesthetic goals while staying updated with new web technologies.</p>
-                 <a href="https://drive.google.com/file/d/1b-iPSQPfDIyl2vUAiE4ZXsiqVYTGzz0P/view?usp=sharing" target="_blank" >Download CV</a>
+            <div class="profile reveal">
+    <div class="profile-card profile-bg">
+
+        <div class="profile-overlay"></div>
+
+        <div class="profile-content">
+            
+            
+            <h2>Abhishek Tripathi</h2>
+            
+            <p class="profile-role">
+                Junior Software Developer
+            </p>
+            
+            <div class="pills">
+                <span>PHP</span>
+                <span>MySQL</span>
+                <span>JavaScript</span>
+                <span>Laravel</span>
+                <span>React</span>
+                <span>REST API</span>
+            </div>
+            <br>
+            <div class="profile-header">
+                <span>DEVELOPER PROFILE</span>
+                <span>2025–PRESENT</span>
+            </div>
+            <hr>
+
+            <div class="profile-info">
+                <div>
+                    <span>Primary Focus</span>
+                    <b>Web Applications & CRM Software</b>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- services section start -->
-    <section class="services" id="services">
-        <div class="max-width">
-            <h2 class="title">My services</h2>
-            <div class="serv-content">
-                <div class="card">
-                    <div class="box">
-                        <i class="fas fa-paint-brush"></i>
-                        <div class="text">Web Design</div>
-                        <p>Web design creates attractive and intuitive website interfaces, emphasizing layout, color,
-                             typography, and imagery to enhance user experience and communicate brand identity with effective
-                              design principles and technologies.</p>
-                    </div>
+                <div>
+                    <span>Backend</span>
+                    <b>PHP / MySQL</b>
                 </div>
-                <div class="card">
-                    <div class="box">
-                        <i class="fas fa-chart-line"></i>
-                        <div class="text">Advertising</div>
-                        <p>Advertising strategically promotes products, services, or
-                             ideas through diverse media to engage audiences and influence consumer 
-                             behavior with creative messaging and market insights.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <i class="fas fa-code"></i>
-                        <div class="text">Web development</div>
-                        <p>Web Developer proficient in HTML, CSS, 
-                            JavaScript, and frameworks like React. 
-                            Skilled in building responsive, user-friendly 
-                            websites. Focused on performance optimization 
-                            and staying updated with industry trends. 
-                            Committed to delivering web solutions that 
-                            drive business success.</p>
-                    </div>
-                </div>
-               </div>
-            </div>
-        </div>
-    </section>
 
-
-    <!-- Education Section -->
-  <section class="Education container text-center mx-auto px-4 py-16 " id="Education">
-    <div class="mb-12">
-      <h1 class="big-4 mb-2 relative text-xl font-semibold text-center after:content-['what_i_Learn'] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:translate-y-full after:bg-[#242727f9] after:text-[#d31b1b] after:px-3 after:py-1 after:rounded after:mt-4 ">
-        <span class="text-4xl ">Education</span></h1>
-      <div class="underline "></div>
-    </div>
-    
-    <div class="flex flex-wrap -mx-4 ">
-      <div class="w-full md:w-1/2 px-4 mb-8 cursor-pointer">
-        <div class="bg-black p-8 rounded-lg          shadow-lg hover:shadow-xl hover:translate-y-1 transition-all duration-300">
-          <span class="text-red-600 font-semibold">2023-Present</span>
-          <h2 class="text-2xl text-[25px] font-md  mt-2">Master of Computer Applications</h2>
-          <span class="text-gray-400 block mb-4">Lovely Professional University, Punjab</span>
-          <p>CGPA : 6.89</p>
-        </div>
-      </div>
-      
-      <div class="w-full md:w-1/2 px-4 mb-8">
-        <div class="bg-black p-8 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-          <span class="text-red-600 font-semibold">2019-2022</span>
-          <h2 class="text-2xl text-[25px] font-md mt-2">Bachelor of Computer Applications</h2>
-          <span class="text-gray-400 block mb-4">United Institute Of Management, Prayagraj</span>
-          <p>CGPA: 6.7 </p>
-        </div>
-      </div>
-    </div>
-
-   
-  </section>
-
-  <!-- Projects Section -->
-  <section class="Project bg-black-700 py-16 " id="Project">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-16 relative">
-
-        <h1 class="big-4 mb-1 relative text-xl font-semibold text-center after:content-['what_i_Complete'] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:translate-y-full after:bg-[#242727f9] after:text-[#d31b1b] after:px-3 after:py-1 after:rounded after:mt-9">
-          <sapn class="text-4xl">Projects</sapn></h1>
-      </div>
-      
-      <div class="flex flex-wrap -mx-4">
-        <!-- Project 1 -->
-        <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-          <div class="h-full ">
-            <span  class="block-20 rounded-lg overflow-hidden group">
-              <div class="h-64 bg-gray-700 bg-cover bg-center transition-transform duration-300 group-hover:scale-105 rounded-lg" style="background-image: url('hotel.jpg');"></div>
-            </span>
-            <div class="bg-black p-6 rounded-lg shadow-lg -mt-6 mx-4 relative z-10">
-              <h3 class="text-xl text-[25px] font-md mb-2">
-                <a href="#" class="hover:text-red-500 transition-colors">
-                  Hotel Management System
-                </a>
-              </h3>
-              <p>A responsive Hotel Management System built with HTML, CSS, and JavaScript for managing bookings, room availability, and guest details with an intuitive admin dashboard.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Project 2 -->
-        <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-          <div class="h-full">
-            <span  class="block-20 rounded-lg overflow-hidden group">
-              <div class="h-64 bg-gray-700 bg-cover bg-center transition-transform duration-300 group-hover:scale-105 rounded-lg" style="background-image: url('Food.jpg');"></div>
-            </span>
-            <div class="bg-black p-6 rounded-lg shadow-lg -mt-6 mx-4 relative z-10">
-              <h3 class="text-xl text-[25px] font-md mb-2">
-                <a href="#" class="hover:text-red-500 transition-colors">
-                  Foodie-Frenzy website
-                </a>
-              </h3>
-              <p>A dynamic food-ordering platform built with React, featuring restaurant listings, menu browsing, cart management, and user reviews with a modern, responsive UI.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Project 3 -->
-        <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-          <div class="h-full">
-            <span class="block-20 rounded-lg overflow-hidden group">
-              <div class="h-64 bg-gray-700 bg-cover bg-center transition-transform duration-300 group-hover:scale-105 rounded-lg" style="background-image: url('Amazon.jpg');"></div>
-            </span>
-            <div class="bg-black p-6 rounded-lg shadow-lg -mt-6 mx-4 relative z-10">
-              <h3 class="text-xl text-[25px] font-md mb-2">
-                <a href="https://github.com/abhishektripathi23/Amazon-Clone.git" class="hover:text-red-500 transition-colors">
-                  Amazon Clone Website 
-                </a>
-              </h3>
-              <p>A responsive Amazon-inspired e-commerce website built with pure HTML5, CSS3, and JavaScript, replicating core functionalities like product listings, cart management, and a modern UI.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Project 4 -->
-        <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-          <div class="h-full">
-            <span class="block-20 rounded-lg overflow-hidden group">
-              <div class="h-64 bg-black bg-cover bg-center transition-transform duration-300 group-hover:scale-105 rounded-lg" style="background-image: url('portfolio.jpg');"></div>
-            </span>
-            <div class="bg-black p-6 rounded-lg shadow-lg -mt-6 mx-4 relative z-10">
-              <h3 class="text-xl text-[25px] font-md mb-2">
-                <a href="https://github.com/abhishektripathi23/Portfolio.git" class="hover:text-red-500 transition-colors">
-                  Portfolio using HTML5,CSS
-                </a>
-              </h3>
-              <p>A personal portfolio website showcasing my projects, technical skills, resume, and contact details—designed with responsive layout and clean UI to attract recruiters and collaborators.</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Project 5 -->
-        <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-          <div class="h-full">
-            <span class="block-20 rounded-lg overflow-hidden group">
-              <div class="h-64 bg-black bg-cover bg-center transition-transform duration-300 group-hover:scale-105 rounded-lg" style="background-image: url('restaurent.jpg');"></div>
-            </span>
-            <div class="bg-black p-6 rounded-lg shadow-lg -mt-6 mx-4 relative z-10">
-              <h3 class="text-xl text-[25px] font-md mb-2">
-                <a href="https://github.com/abhishektripathi23/restaurant-booking-syatem-in-php.git" class="hover:text-red-500 transition-colors">
-                  Restaurant booking Website using PHP
-                </a>
-              </h3>
-              <p>Create a restaurant website with online ordering, menus, and reservation systems integration using HTML, CSS, JS and PHP.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-    <!-- skills section start -->
-    <section class="skills" id="skills">
-        <div class="max-width">
-            <h2 class="title">My skills</h2>
-            <div class="skills-content">
-                <div class="column left">
-                    <div class="text">My creative skills & experiences.</div>
-                    <p>  As a web developer, My creative skills encompass proficiency in HTML, CSS, and 
-                        JavaScript, with expertise in responsive design, UI/UX principles, and integrating 
-                        interactive elements for visually appealing and user-friendly websites. Your portfolio 
-                        showcases your ability to translate design concepts into functional and aesthetically
-                         pleasing web solutions.</p>
-                    <a href="#">Read more</a>
-                </div>
-                <div class="column right">
-                    <div class="bars">
-                        <div class="info">
-                            <span>C++</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="line C"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>HTML</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="line html"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>CSS</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="line css"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>JavaScript</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="line js"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>React</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="line react"></div>
-                    </div>
-                    
-                    <div class="bars">
-                        <div class="info">
-                            <span>PHP</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="line PHP"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>MYSQL</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="line SQL"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>Tailwind CSS</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="line tailwind"></div>
-                    </div>
+                <div>
+                    <span>Frontend</span>
+                    <b>HTML / CSS / Bootstrap / JavaScript / React / Tailwind</b>
                 </div>
             </div>
+
         </div>
-    </section> 
-    
-    
-
-    <!-- contact section start -->
-    <section class="contact" id="contact">
-        <div class="max-width">
-            <h2 class="title">Contact me</h2>
-            <div class="contact-content">
-                <div class="column left">
-                    <div class="text">Get in Touch</div>
-                    <p> You can contact me via email
-                          or reach out to me on LinkedIn
-                          I'm happy to discuss any inquiries, collaborations, or projects you have in mind. 
-                          Looking forward to hearing from you!</p>
-                    <div class="icons">
-                        <div class="row">
-                            <i class="fas fa-user"></i>
-                            <div class="info">
-                                <div class="head"><b>Name :</b></div>
-                                <div class="sub-title">Abhishek tripathi</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="info">
-                                <div class="head"><b>Address :</b></div>
-                                <div class="sub-title"> Charka, Baberu, Banda, Uttar Pradesh</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <i class="fas fa-envelope"></i>
-                            <div class="info">
-                                <div class="head"><b>E-mail :</b></div>
-                                <div class="sub-title">abhishektripathi0205@gmail.com</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <i class="fas fa-phone"></i>
-                            <div class="info">
-                                <div class="head"><b>Contact :</b></div>
-                                <div class="sub-title">9625306594</div>
-                               
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column right">
-    <div class="text">Message me</div>
-
-    <form class="text-black" id="enquiryForm">
-        <div class="fields">
-            <div class="field name">
-                <input type="text" id="name" name="name" placeholder="Name" >
-            </div>
-
-            <div class="field email">
-                <input type="email" id="email" name="email" placeholder="Email" >
-            </div>
-        </div>
-
-        <div class="field">
-            <input type="text" id="phone" name="phone" placeholder="Phone Number"
-                onkeypress="return isNumber(event)" minlength="10" maxlength="15" >
-        </div>
-
-        <div class="field">
-            <input type="text" id="subject" name="subject" placeholder="Subject">
-        </div>
-
-        <div class="field textarea">
-            <textarea id="message" name="message" cols="30" rows="10" placeholder="Message.."></textarea>
-        </div>
-
-        <div class="button-area">
-            <button type="submit">Send message</button>
-        </div>
-    </form>
-
-    <div id="thankyou" style="display:none; text-align:center; font-size:18px; color:green; padding:20px;">
-        <p>Thank you! Your enquiry was sent successfully.</p>
     </div>
 </div>
+            </div>
+        </section>
 
+        <section id="about" class="section muted">
+            <div class="container">
+                <div class="heading reveal"><small>01 / ABOUT ME</small>
+                    <h2>Developer focused on practical, business-oriented web applications.</h2>
+                </div>
+                <div class="about">
+                    <div class="reveal">
+                        <p class="big">I am a motivated Junior Software Developer with hands-on experience in web
+                            application development, backend programming and database-driven systems.</p>
+                        <p>My professional experience includes developing and maintaining CRM and CMS solutions,
+                            building backend functionality with PHP and MySQL, integrating REST APIs, working with AJAX
+                            and JavaScript, and creating responsive interfaces using Bootstrap and other frontend
+                            technologies.</p>
+                        <p>I have worked across development tasks involving business workflows, user management,
+                            role-based access, reporting, data synchronization and troubleshooting.</p>
+                    </div>
+                    <div class="about-cards reveal">
+                        <article>⌘ <b>Development</b><span>Web applications & backend systems</span></article>
+                        <article>◇ <b>Business Systems</b><span>CRM, CMS & management workflows</span></article>
+                        <article>▣ <b>Data</b><span>MySQL, SQL queries & database features</span></article>
+                        <article>⚡ <b>Integration</b><span>REST APIs & third-party services</span></article>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section id="experience" class="section">
+            <div class="container">
+                <div class="heading reveal"><small>02 / EXPERIENCE</small>
+                    <h2>Professional journey.</h2>
+                    <p>Experience and responsibilities based on my professional resume.</p>
+                </div>
+                <div class="experience">
+                    <article class="job reveal">
+                        <aside>MAR 2026<strong>Present</strong></aside>
+                        <div><small>JUNIOR SOFTWARE DEVELOPER</small>
+                            <h3>MicroID Pvt Ltd <em>Current</em></h3>
+                            <p>Working on a CRM Management System covering Sales Management, Inventory Management and
+                                Service Provider Management.</p>
+                            <ul>
+                                <li>Developing and maintaining CRM modules for business workflows.</li>
+                                <li>Working with REST APIs for integration and data synchronization.</li>
+                                <li>Implementing backend logic using PHP and MySQL.</li>
+                                <li>Building responsive interfaces using JavaScript and Bootstrap.</li>
+                                <li>Working on data handling and reporting functionality.</li>
+                                <li>Supporting sales, inventory and service workflows.</li>
+                            </ul>
+                            <div class="tags"><i>PHP</i><i>MySQL</i><i>REST API</i><i>JavaScript</i><i>Bootstrap</i>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="job reveal">
+                        <aside>JUN 2025<strong>MAR 2026</strong></aside>
+                        <div><small>BACKEND DEVELOPER — PHP</small>
+                            <h3>WebIBM Pvt Ltd</h3>
+                            <p>Developed backend systems and CMS solutions for websites and business applications using
+                                PHP and MySQL.</p>
+                            <ul>
+                                <li>Developed backend functionality using PHP and MySQL.</li>
+                                <li>Built and maintained custom CMS and admin panels.</li>
+                                <li>Implemented AJAX-based features and dynamic workflows.</li>
+                                <li>Worked on role-based access and user management.</li>
+                                <li>Developed reporting tools and data management features.</li>
+                                <li>Optimized SQL queries and fixed backend bugs.</li>
+                            </ul>
+                            <div class="tags"><i>PHP</i><i>MySQL</i><i>AJAX</i><i>JavaScript</i><i>CMS</i></div>
+                        </div>
+                    </article>
+                    <!-- <article class="job reveal">
+                        <aside>JAN 2025<strong>MAY 2025</strong></aside>
+                        <div><small>WEB DEVELOPER INTERN</small>
+                            <h3>WebIBM Pvt Ltd</h3>
+                            <p>Gained practical experience in web development and contributed to development tasks using
+                                PHP, MySQL and frontend technologies.</p>
+                            <ul>
+                                <li>Worked on web development and backend tasks.</li>
+                                <li>Worked with PHP and MySQL for database-driven functionality.</li>
+                                <li>Supported frontend implementation and responsive web pages.</li>
+                                <li>Learned practical development and debugging workflows.</li>
+                            </ul>
+                            <div class="tags"><i>PHP</i><i>MySQL</i><i>HTML</i><i>CSS</i><i>JavaScript</i></div>
+                        </div>
+                    </article> -->
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section muted">
+            <div class="container">
+                <div class="heading reveal"><small>03 / TECHNICAL SKILLS</small>
+                    <h2>A stack built around web development.</h2>
+                </div>
+                <div class="skills">
+                    <article><b>⌘</b>
+                        <h3>Languages</h3>
+                        <p>C · C++ · PHP · JavaScript · HTML · CSS</p>
+                    </article>
+
+                    <article><b>◈</b>
+                        <h3>Frontend</h3>
+                        <p>HTML · CSS · JavaScript · React.js · Bootstrap · Tailwind CSS · AJAX</p>
+                    </article>
+
+                    <article><b>▣</b>
+                        <h3>Backend & Frameworks</h3>
+                        <p>PHP · Laravel · REST API · API Integration</p>
+                    </article>
+
+                    <article><b>▤</b>
+                        <h3>Database</h3>
+                        <p>MySQL · SQL · CRUD · Database Management</p>
+                    </article>
+
+                    <article><b>⚙</b>
+                        <h3>Tools</h3>
+                        <p>Git · GitHub · VS Code · XAMPP</p>
+                    </article>
+
+                    <article><b>◇</b>
+                        <h3>Development</h3>
+                        <p>CRM · CMS · Admin Panels · Role-Based Access · Responsive Web Development</p>
+                    </article>
 
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- footer section start -->
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="heading reveal"><small>04 / PROJECTS</small>
+                    <h2>Selected projects & professional work.</h2>
+                    <p>Project descriptions are limited to information supported by the supplied resume.</p>
+                </div>
+                <div class="projects">
+                    <article class="project featured reveal">
+                        <div class="cover">01<br>◉</div>
+                        <div><small>MICROID PVT LTD · PROFESSIONAL PROJECT</small>
+                            <h3>CRM Management System</h3>
+                            <p>A CRM Management System covering Sales Management, Inventory Management and Service
+                                Provider Management. Work includes REST API integration, data synchronization, backend
+                                development and responsive interfaces.</p>
+                            <div class="tags"><i>Sales Management</i><i>Inventory Management</i><i>Service Provider
+                                    Management</i><i>REST API</i><i>Data Synchronization</i><i>PHP</i><i>MySQL</i></div>
+                        </div>
+                    </article>
+                    <article class="project reveal">
+                        <div class="cover">02<br>◉</div>
+                        <div><small>WEB PROJECT</small>
+                            <h3>Foodie Frenzy</h3>
+                            <p>A web project listed in the professional portfolio experience, demonstrating practical
+                                web development and interface implementation.</p>
+                            <div class="tags"><i>HTML</i><i>Tailwind</i><i>JavaScript</i><i>ReactJS</i></div>
+                        </div>
+                    </article>
+                    <article class="project reveal">
+                        <div class="cover">03<br>◉</div>
+                        <div><small>WEBIBM · PROFESSIONAL WORK</small>
+                            <h3>Web Applications & CMS Work</h3>
+                            <p>Professional work included custom CMS development, admin panels, user management,
+                                role-based access, reporting tools, AJAX features and database-driven functionality.</p>
+                            <div class="tags"><i>PHP</i><i>MySQL</i><i>AJAX</i><i>CMS</i> <i>JavaScript</i> <i>HTML</i> <i>CSS</i></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section muted">
+            <div class="container">
+                <div class="heading reveal"><small>05 / EDUCATION</small>
+                    <h2>Academic background.</h2>
+                </div>
+                <div class="education">
+                    <article><b>🎓</b>
+                        <div><small>AUG 2023 — MAY 2025</small>
+                            <h3>Master of Computer Applications</h3>
+                            <p>Lovely Professional University, Jalandhar</p><strong>CGPA: 7.0</strong>
+                        </div>
+                    </article>
+                    <article><b>🎓</b>
+                        <div><small>AUG 2019 — OCT 2022</small>
+                            <h3>Bachelor of Computer Applications</h3>
+                            <p>United Institute of Management, Prayagraj</p><strong>67%</strong>
+                        </div>
+                    </article>
+                    <article><b>▣</b>
+                        <div><small>APRIL 2019</small>
+                            <h3>Intermediate</h3>
+                            <p>Brij Bihari Sahay Inter College, Prayagraj</p><strong>59%</strong>
+                        </div>
+                    </article>
+                    <article><b>▣</b>
+                        <div><small>APRIL 2017</small>
+                            <h3>Matriculation</h3>
+                            <p>Brij Bihari Sahay Inter College, Prayagraj</p><strong>70%</strong>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates" class="section">
+            <div class="container">
+                <div class="heading reveal"><small>06 / CERTIFICATIONS</small>
+                    <h2>Additional learning.</h2>
+                    <p>Credentials and learning experiences listed in the resume.</p>
+                </div>
+                <div class="certs">
+                    <article>🏆<div>
+                            <h3>Web Development Internship</h3>
+                            <p>Practical development experience</p>
+                        </div>
+                    </article>
+                    <article>JS<div>
+                            <h3>JavaScript Certification</h3>
+                            <p>JavaScript technical learning</p>
+                            <p>By:- Cipher Schools</p>
+                        </div>
+                    </article>
+                    <article>WEB<div>
+                            <h3>Web Development Certification</h3>
+                            <p>Web development fundamentals</p>
+                            <p>By:- Cipher Schools</p>
+                        </div>
+                    </article>
+                    <article>NET<div>
+                            <h3>Networking Basics</h3>
+                            <p>Networking fundamentals</p>
+                            <p>By:- Cisco Academy.</p>
+                        </div>
+                    </article>
+                    <article>SE<div>
+                            <h3>Software Engineering</h3>
+                            <p>Software engineering concepts</p>
+                            <p>By:- Saylor Academy</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container contact-grid">
+                <div class="reveal"><small class="eyebrow">07 / CONTACT</small>
+                    <h2>Have a role or project in mind?</h2>
+                    <p>I am open to suitable software development opportunities. Send a message and I will get back to
+                        you.</p>
+                    <div class="contact-links"><a href="mailto:abhishektripathi0205@gmail.com">✉
+                            abhishektripathi0205@gmail.com</a><a href="tel:+919610531028">☎ +91 9625306594</a>
+                                <!-- <a href="https://github.com/abhishektripathi23" target="_blank">◉
+                                github.com/abhishektripathi23</a> -->
+                        </div>
+                </div>
+                <form class="form reveal" action="ajax.php" method="post" id="contactForm">
+                    <div class="formrow"><label>Name<input name="name" required></label><label>Email<input name="email"
+                                type="email" required></label></div><label>Subject<input name="subject" required
+                            placeholder="Job opportunity / Project enquiry"></label><label>Message<textarea
+                            name="message" rows="7" required></textarea></label><button class="btn primary"
+                        id="submit">Send Message →</button>
+                    <p id="status"></p>
+                </form>
+            </div>
+        </section>
+    </main>
     <footer>
-        <span>Created By <a href="#">Abhishek Tripathi</a>  <span class="far fa-copyright"></span> 2024 All rights reserved.</span>
+        <div class="container footer">
+            <div><strong>Abhishek Tripathi</strong><small>Junior Software Developer</small></div><span>© <b
+                    id="year"></b> Abhishek Tripathi</span><a href="#home">Back to top ↑</a>
+        </div>
     </footer>
-
-     <script src="index.js"></script>
-
-     
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-/* ============================
-   Allow only numbers in phone field
-============================ */
-function isNumber(evt) {
-    var charCode = evt.which ? evt.which : evt.keyCode;
-    return !(charCode < 48 || charCode > 57);
-}
-
-/* ============================
-   Submit form using AJAX
-============================ */
-$(document).ready(function(){
-    $("#enquiryForm").on("submit", function(e) {
-        e.preventDefault(); 
-        
-        if (validateForm()) { 
-            var name    = $("#name").val();
-            var email   = $("#email").val();
-            var phone   = $("#phone").val();
-            var subject = $("#subject").val();
-            var message = $("#message").val();
-
-            // Auto-detect domain
-            var baseUrl = window.location.hostname === "https" 
-                ? "https://portfolio-hazel-ten-91.vercel.app/"      // <-- Change folder name if needed
-                : window.location.origin;
-
-            var ajaxUrl = baseUrl + "/ajax.php?q=requestQuote";
-
-            $.ajax({        
-                url: ajaxUrl,
-                type: 'POST',
-                dataType: 'html',
-                data: { 
-                    name:name, 
-                    email:email, 
-                    phone:phone, 
-                    subject:subject, 
-                    message:message 
-                },
-                success: function(response) {
-                    if($.trim(response) == "1") {
-                        $("#thankyou").show();
-                        $("#enquiryForm").hide();
-                    } else {
-                        $("#thankyou")
-                            .html('<p style="color:red;">Something went wrong. Please try again.</p>')
-                            .show();
-                        $("#enquiryForm").show();
-                    }
-                },
-                error: function() {
-                    $("#thankyou")
-                        .html('<p style="color:red;">Failed to connect. Please try again.</p>')
-                        .show();
-                }
-            });
-        }
-    });
-});
-
-/* ============================
-   Form Validation Function
-============================ */
-function validateForm() {
-    var valid = true;
-
-    $("#enquiryForm input, #enquiryForm textarea").css({'background-color':'', 'border':''});
-
-    if(!$("#name").val()) {
-        $("#name").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
-        valid = false;
-    }
-
-    if(!$("#email").val() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#email").val())) {
-        $("#email").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
-        valid = false;
-    }
-
-    if(!$("#phone").val() || $("#phone").val().length < 10 || $("#phone").val().length > 15) {
-        $("#phone").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
-        valid = false;
-    }
-  
-    if(!$("#subject").val()) {
-        $("#subject").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
-        valid = false;
-    }
-
-    if(!$("#message").val()) {
-        $("#message").css({'background-color':'#f4e0e0','border':'1px solid #e11f26'});
-        valid = false;
-    }
-
-    return valid;
-}
-</script>
-
+    <script src="index.js"></script>
 </body>
+
 </html>
