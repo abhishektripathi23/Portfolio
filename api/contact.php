@@ -11,7 +11,6 @@ header('Content-Type: application/json; charset=utf-8');
 */
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-
     http_response_code(405);
 
     echo json_encode([
@@ -25,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 /*
 |--------------------------------------------------------------------------
-| Helper function
+| Helper
 |--------------------------------------------------------------------------
 */
 
@@ -42,27 +41,18 @@ function cleanInput(string $value): string
 */
 
 $name = cleanInput($_POST['name'] ?? '');
-
 $email = trim($_POST['email'] ?? '');
-
 $subject = cleanInput($_POST['subject'] ?? '');
-
 $message = trim(strip_tags($_POST['message'] ?? ''));
 
 
 /*
 |--------------------------------------------------------------------------
-| Validation
+| Validate required fields
 |--------------------------------------------------------------------------
 */
 
-if (
-    $name === '' ||
-    $email === '' ||
-    $subject === '' ||
-    $message === ''
-) {
-
+if ($name === '' || $email === '' || $subject === '' || $message === '') {
     http_response_code(422);
 
     echo json_encode([
@@ -81,7 +71,6 @@ if (
 */
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
     http_response_code(422);
 
     echo json_encode([
@@ -95,118 +84,236 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 /*
 |--------------------------------------------------------------------------
-| Your receiving email
-|--------------------------------------------------------------------------
-|
-| IMPORTANT:
-| Change this to your actual email address.
-|
-*/
-
-$recipient = 'YOUR_EMAIL@example.com';
-
-
-/*
-|--------------------------------------------------------------------------
-| Prevent email header injection
+| Remove newlines from header-related values
 |--------------------------------------------------------------------------
 */
 
 $name = preg_replace('/[\r\n]+/', ' ', $name);
-
 $email = preg_replace('/[\r\n]+/', ' ', $email);
-
 $subject = preg_replace('/[\r\n]+/', ' ', $subject);
 
 
 /*
 |--------------------------------------------------------------------------
-| Email body
+| Get Resend API key from Vercel Environment Variable
 |--------------------------------------------------------------------------
 */
 
-$emailBody = "
-
-You have received a new message from your portfolio.
-
---------------------------------------------------
-
-Name:
-$name
-
-Email:
-$email
-
-Subject:
-$subject
-
---------------------------------------------------
-
-Message:
-
-$message
-
---------------------------------------------------
-
-Sent from:
-Abhishek Tripathi Portfolio
-
-";
+$resendApiKey = getenv('RESEND_API_KEY');
 
 
-/*
-|--------------------------------------------------------------------------
-| Email headers
-|--------------------------------------------------------------------------
-*/
-
-$headers = [];
-
-$headers[] = 'MIME-Version: 1.0';
-
-$headers[] = 'Content-Type: text/plain; charset=UTF-8';
-
-$headers[] = 'From: Portfolio Contact <' . $recipient . '>';
-
-$headers[] = 'Reply-To: ' . $email;
-
-
-/*
-|--------------------------------------------------------------------------
-| Send email
-|--------------------------------------------------------------------------
-*/
-
-$sent = mail(
-    $recipient,
-    'Portfolio Contact: ' . $subject,
-    $emailBody,
-    implode("\r\n", $headers)
-);
-
-
-/*
-|--------------------------------------------------------------------------
-| Response
-|--------------------------------------------------------------------------
-*/
-
-if (!$sent) {
-
+if (!$resendApiKey) {
     http_response_code(500);
 
     echo json_encode([
         'success' => false,
-        'message' => 'Unable to send the message. Please email me directly.'
+        'message' => 'Email service is not configured.'
     ]);
 
     exit;
 }
 
 
+/*
+|--------------------------------------------------------------------------
+| Your email address
+|--------------------------------------------------------------------------
+|
+| IMPORTANT:
+| Replace this with the email where you want to RECEIVE
+| portfolio contact messages.
+|
+*/
+
+$recipient = 'abhishektripathi0205@gmail.com';
+
+
+/*
+|--------------------------------------------------------------------------
+| Sender
+|--------------------------------------------------------------------------
+|
+| For initial testing, Resend provides onboarding@resend.dev.
+|
+| Once you verify your own domain in Resend, change this to:
+|
+| Abhishek Tripathi <hello@yourdomain.com>
+|
+*/
+
+$sender = 'Portfolio <onboarding@resend.dev>';
+
+
+/*
+|--------------------------------------------------------------------------
+| Email HTML
+|--------------------------------------------------------------------------
+*/
+
+$htmlMessage = '
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Contact</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; background:#f5f5f5; padding:30px;">
+
+    <div style="
+        max-width:650px;
+        margin:auto;
+        background:#ffffff;
+        padding:30px;
+        border-radius:12px;
+    ">
+
+        <h2 style="margin-top:0;">
+            New Portfolio Contact
+        </h2>
+
+        <p>
+            Someone has contacted you through your portfolio website.
+        </p>
+
+        <hr>
+
+        <p>
+            <strong>Name:</strong><br>
+            ' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '
+        </p>
+
+        <p>
+            <strong>Email:</strong><br>
+            ' . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . '
+        </p>
+
+        <p>
+            <strong>Subject:</strong><br>
+            ' . htmlspecialchars($subject, ENT_QUOTES, 'UTF-8') . '
+        </p>
+
+        <p>
+            <strong>Message:</strong><br>
+            ' . nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) . '
+        </p>
+
+        <hr>
+
+        <p style="font-size:12px;color:#777;">
+            Sent from Abhishek Tripathi Portfolio
+        </p>
+
+    </div>
+
+</body>
+</html>
+';
+
+
+/*
+|--------------------------------------------------------------------------
+| Prepare Resend API request
+|--------------------------------------------------------------------------
+*/
+
+$payload = [
+    'from' => $sender,
+    'to' => [$recipient],
+    'reply_to' => $email,
+    'subject' => 'Portfolio Contact: ' . $subject,
+    'html' => $htmlMessage
+];
+
+
+/*
+|--------------------------------------------------------------------------
+| Send request to Resend
+|--------------------------------------------------------------------------
+*/
+
+$ch = curl_init('https://api.resend.com/emails');
+
+curl_setopt_array($ch, [
+    CURLOPT_POST => true,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_HTTPHEADER => [
+        'Authorization: Bearer ' . $resendApiKey,
+        'Content-Type: application/json'
+    ],
+
+    CURLOPT_POSTFIELDS => json_encode($payload),
+
+    CURLOPT_TIMEOUT => 20
+]);
+
+
+$response = curl_exec($ch);
+
+$curlError = curl_error($ch);
+
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+curl_close($ch);
+
+
+/*
+|--------------------------------------------------------------------------
+| Handle cURL error
+|--------------------------------------------------------------------------
+*/
+
+if ($response === false || $curlError !== '') {
+    http_response_code(500);
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'Unable to connect to the email service.'
+    ]);
+
+    exit;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Decode Resend response
+|--------------------------------------------------------------------------
+*/
+
+$result = json_decode($response, true);
+
+
+/*
+|--------------------------------------------------------------------------
+| Handle Resend error
+|--------------------------------------------------------------------------
+*/
+
+if ($httpCode < 200 || $httpCode >= 300) {
+
+    http_response_code(500);
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'Email could not be sent.'
+    ]);
+
+    exit;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Success
+|--------------------------------------------------------------------------
+*/
+
 echo json_encode([
     'success' => true,
     'message' => 'Thank you! Your message has been sent successfully.'
 ]);
 
-?>
+exit;
